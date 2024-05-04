@@ -1,19 +1,37 @@
 <template>
-  <div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
-    <div>
-      <h1>{{ pageTitle }}</h1>
-      <div class="form-group">
-        <label for="textInput">Masukkan Teks:</label>
-        <input type="text" class="form-control" id="textInput" v-model="inputText" @input="handleChange">
-      </div>
-      <div class="form-group">
-        <label for="textLength">Panjang Teks:</label>
-        <p id="textLength">{{ inputText.length }}</p>
-      </div>
-      <div :class="{ 'alert': showAlert, 'alert-danger': isError, 'alert-success': !isError }" role="alert">
-        {{ alertMessage }}
-      </div>
+  <div class="app">
+    <!-- Elemen HTML yang berbeda -->
+    <h1 :class="{ 'red-text': isRed }">Website Interaktif Vue</h1>
+    <p v-if="showParagraph">Ini adalah sebuah paragraf.</p>
+    
+    <!-- Elemen input teks -->
+    <input 
+      type="text" 
+      v-model="inputText" 
+      placeholder="Masukkan teks"
+      @keyup.enter="saveText"
+    >
+    
+    <!-- Output yang menampilkan teks yang tersimpan -->
+    <div v-for="(text, index) in savedTexts" :key="index">
+      <p>{{ text }}</p>
+      <button @click="deleteText(index)">Delete</button>
     </div>
+    
+    <!-- Output yang menampilkan teks yang sedang diketik secara real-time -->
+    <p>{{ inputText }}</p>
+    
+    <!-- Elemen dengan class dan style bindings -->
+    <div 
+      :class="{ 'blue-box': isBlue }" 
+      :style="{ fontSize: fontSize + 'px', border: borderStyle }"
+    >
+      Elemen dengan class dan style bindings
+    </div>
+    
+    <!-- Tombol untuk mengubah data Vue -->
+    <button @click="toggleColor">Ubah Warna</button>
+    <button @click="toggleParagraph">Tampilkan/sembunyikan Paragraf</button>
   </div>
 </template>
 
@@ -21,41 +39,48 @@
 export default {
   data() {
     return {
-      pageTitle: 'Halaman Web Sederhana',
+      isRed: false,
+      showParagraph: true,
       inputText: '',
-      isError: false,
-      alertMessage: '',
-      showAlert: false
+      isBlue: false,
+      fontSize: 20,
+      borderStyle: '1px solid black',
+      savedTexts: [] // Menggunakan array untuk menyimpan output-output
     };
   },
   methods: {
-    handleChange() {
-      // Menghitung panjang teks
-      const textLength = this.inputText.length;
-
-      // Mengubah pesan alert berdasarkan panjang teks
-      if (textLength === 0) {
-        this.alertMessage = 'Teks tidak boleh kosong!';
-        this.isError = true;
-        this.showAlert = true;
-      } else if (textLength <= 5) {
-        this.alertMessage = 'Teks terlalu pendek!';
-        this.isError = true;
-        this.showAlert = true;
-      } else if (textLength >= 20) {
-        this.alertMessage = 'Teks terlalu panjang!';
-        this.isError = true;
-        this.showAlert = true;
-      } else {
-        this.showAlert = false;
+    toggleColor() {
+      this.isRed = !this.isRed;
+    },
+    toggleParagraph() {
+      this.showParagraph = !this.showParagraph;
+    },
+    saveText() {
+      if (this.inputText.trim() !== '') { // Menyimpan teks hanya jika tidak kosong
+        this.savedTexts.push(this.inputText);
+        this.inputText = ''; // Bersihkan input setelah disimpan
       }
+    },
+    deleteText(index) {
+      this.savedTexts.splice(index, 1); // Menghapus teks dari array berdasarkan index
     }
   }
 };
 </script>
 
 <style scoped>
-.container {
+.app {
   text-align: center;
+  margin-top: 50px;
+}
+
+.red-text {
+  color: red;
+}
+
+.blue-box {
+  background-color: blue;
+  color: white;
+  padding: 10px;
 }
 </style>

@@ -1,14 +1,68 @@
-
-/* Additional custom styles */
+/* Body */
 body {
-  background-image: linear-gradient(to right, #FFF455, #FF204E);
+  font-family: Arial, sans-serif;
+  background-image: repeating-linear-gradient(#7E30E1, #80B3FF);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
+/* Container */
 .container {
-  max-width: 600px;
-  margin: auto;
+  text-align: center;
 }
 
-.input-group {
-  margin-bottom: 20px;
+/* Input */
+input[type="text"] {
+  width: 300px;
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Output */
+.output {
+  color: #333;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+/* Button */
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Red Text */
+.red-text {
+  color: red;
+}
+
+/* Blue Box */
+.blue-box {
+  background-color: blue;
+  color: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+/* Custom Class */
+.custom-class {
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline;
 }
