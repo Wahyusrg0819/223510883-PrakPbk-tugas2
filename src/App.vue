@@ -1,9 +1,15 @@
 <template>
-  <div class="app">
+  <div class="app" :style="{ backgroundColor: isBackgroundRed ? 'blue' : 'white' }">
     <!-- Elemen HTML yang berbeda -->
     <h1 :class="{ 'red-text': isRed }">Website Interaktif Vue</h1>
     <p v-if="showParagraph">Ini adalah sebuah paragraf.</p>
     
+    <ul>
+      <li>v-model & v-for</li>
+    </ul>
+
+    <p>inputan dapat di enter</p>
+
     <!-- Elemen input teks -->
     <input 
       type="text" 
@@ -11,6 +17,8 @@
       placeholder="Masukkan teks"
       @keyup.enter="saveText"
     >
+
+    
     
     <!-- Output yang menampilkan teks yang tersimpan -->
     <div v-for="(text, index) in savedTexts" :key="index">
@@ -45,12 +53,14 @@ export default {
       isBlue: false,
       fontSize: 20,
       borderStyle: '1px solid black',
-      savedTexts: [] // Menggunakan array untuk menyimpan output-output
+      savedTexts: [], // Menggunakan array untuk menyimpan output-output
+      isBackgroundRed: false // Menambah properti untuk status latar belakang
     };
   },
   methods: {
     toggleColor() {
       this.isRed = !this.isRed;
+      this.isBackgroundRed = !this.isBackgroundRed; // Mengubah status latar belakang
     },
     toggleParagraph() {
       this.showParagraph = !this.showParagraph;
@@ -72,6 +82,10 @@ export default {
 .app {
   text-align: center;
   margin-top: 50px;
+}
+
+p {
+  font-size: 20px;
 }
 
 .red-text {
