@@ -1,4 +1,5 @@
 <template>
+  
   <div class="app" :style="{ backgroundColor: isBackgroundRed ? 'blue' : 'white' }">
     <!-- Elemen HTML yang berbeda -->
     <h1 :class="{ 'red-text': isRed }">Website Interaktif Vue</h1>
